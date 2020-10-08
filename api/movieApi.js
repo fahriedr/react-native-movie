@@ -6,7 +6,7 @@ const PopularMovies = () => {
   const [movie, setMovie] = useState([]);
   useEffect(() => {
     const data = Axios.get(
-      `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=1`,
+      `${BASE_URL}/movie/popular?api_key=${API_KEY}`,
     ).then((response) => setMovie(response.data.results));
     return () => {
       data;

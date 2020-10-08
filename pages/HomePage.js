@@ -11,7 +11,6 @@ import {
 import Header from '../components/Header';
 import CardComponent from '../components/CardComponent';
 import {PopularMovies, TopRatedMovies} from '../api/movieApi';
-import BottomNavigation from '../components/BottomNavigation';
 
 function HomePage() {
   const size = 5;
@@ -19,13 +18,12 @@ function HomePage() {
   const popularMovies = PopularMovies();
   const topRatedMovies = TopRatedMovies();
 
-  // console.log(popularMovies, topRatedMovies);
-
   return (
+    // <SafeAreaView style={{}}>
     <View>
       <Header judul={'Movie App'}></Header>
-      <ScrollView style={{flexDirection: 'column'}}>
-        <View style={style.body}>
+      <View style={style.body}>
+        <ScrollView contentContainerStyle={{paddingBottom: 200}}>
           <View style={style.card_container}>
             <View style={style.tag}>
               <Text style={style.popular_text}>Popular Movie </Text>
@@ -52,7 +50,7 @@ function HomePage() {
               ))}
             </ScrollView>
           </View>
-          {/* <View style={style.card_container}>
+          <View style={style.card_container}>
             <View style={style.tag}>
               <Text style={style.popular_text}>Top Rated Movie </Text>
               <Pressable onPress={() => Alert.alert('Click')}>
@@ -60,15 +58,15 @@ function HomePage() {
               </Pressable>
             </View>
             <ScrollView horizontal style={style.popular_movie}>
-              {topRatedMovies.slice(0, 6).map((movie) => (
+              {topRatedMovies.slice(0, 7).map((movie) => (
                 <CardComponent movie={movie} key={movie.id} />
               ))}
             </ScrollView>
-          </View> */}
-        </View>
-      </ScrollView>
-      <BottomNavigation />
+          </View>
+        </ScrollView>
+      </View>
     </View>
+    // </SafeAreaView>
   );
 }
 
@@ -80,6 +78,7 @@ const style = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: '#0a0a19',
+    position: 'relative',
   },
   tag: {
     margin: 15,

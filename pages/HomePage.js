@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -10,42 +10,64 @@ import {
 } from 'react-native';
 import Header from '../components/Header';
 import CardComponent from '../components/CardComponent';
-import Axios from 'axios';
+import {PopularMovies, TopRatedMovies} from '../api/movieApi';
+import BottomNavigation from '../components/BottomNavigation';
 
 function HomePage() {
-  const API_KEY = '08c83227006639b229398cce3e84bc8a';
-  const BASE_URL = 'https://api.themoviedb.org/3';
-
   const size = 5;
-  const [popularMovie, setPopularMovie] = useState([]);
 
-  useEffect(() => {
-    const data = Axios.get(
-      `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=1`,
-    ).then((response) => setPopularMovie(response.data.results));
-    return () => {
-      data;
-    };
-  }, []);
+  const popularMovies = PopularMovies();
+  const topRatedMovies = TopRatedMovies();
 
-  console.log(popularMovie.slice(0, size));
+  // console.log(popularMovies, topRatedMovies);
 
   return (
     <View>
       <Header judul={'Movie App'}></Header>
-      <View style={style.body}>
-        <View style={style.tag}>
-          <Text style={style.popular_text}>Popular Movie </Text>
-          <Pressable onPress={() => Alert.alert('Click')}>
-            <Text style={style.popular_text}>More </Text>
-          </Pressable>
+      <ScrollView style={{flexDirection: 'column'}}>
+        <View style={style.body}>
+          <View style={style.card_container}>
+            <View style={style.tag}>
+              <Text style={style.popular_text}>Popular Movie </Text>
+              <Pressable onPress={() => Alert.alert('Click')}>
+                <Text style={style.popular_text}>More </Text>
+              </Pressable>
+            </View>
+            <ScrollView horizontal style={style.popular_movie}>
+              {popularMovies.slice(0, size).map((movie) => (
+                <CardComponent movie={movie} key={movie.id} />
+              ))}
+            </ScrollView>
+          </View>
+          <View style={style.card_container}>
+            <View style={style.tag}>
+              <Text style={style.popular_text}>Top Rated Movie </Text>
+              <Pressable onPress={() => Alert.alert('Click')}>
+                <Text style={style.popular_text}>More </Text>
+              </Pressable>
+            </View>
+            <ScrollView horizontal style={style.popular_movie}>
+              {topRatedMovies.slice(0, 6).map((movie) => (
+                <CardComponent movie={movie} key={movie.id} />
+              ))}
+            </ScrollView>
+          </View>
+          {/* <View style={style.card_container}>
+            <View style={style.tag}>
+              <Text style={style.popular_text}>Top Rated Movie </Text>
+              <Pressable onPress={() => Alert.alert('Click')}>
+                <Text style={style.popular_text}>More </Text>
+              </Pressable>
+            </View>
+            <ScrollView horizontal style={style.popular_movie}>
+              {topRatedMovies.slice(0, 6).map((movie) => (
+                <CardComponent movie={movie} key={movie.id} />
+              ))}
+            </ScrollView>
+          </View> */}
         </View>
-        <ScrollView horizontal style={style.popular_movie}>
-          {popularMovie.slice(0, size).map((movie) => (
-            <CardComponent movie={movie} key={movie.id} />
-          ))}
-        </ScrollView>
-      </View>
+      </ScrollView>
+      <BottomNavigation />
     </View>
   );
 }
@@ -66,11 +88,16 @@ const style = StyleSheet.create({
   },
   popular_text: {
     color: '#eee',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   popular_movie: {
     flexGrow: 1,
     flex: 1,
     flexDirection: 'row',
+  },
+  card_container: {
+    marginVertical: 8,
   },
 });
 

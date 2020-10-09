@@ -7,34 +7,33 @@
  */
 
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
-import HomePage from './pages/HomePage';
+import {StyleSheet} from 'react-native';
 import BottomNavigation from './components/BottomNavigation';
+import {NavigationContainer, DarkTheme} from '@react-navigation/native';
+
+const MyTheme = {
+  dark: false,
+  colors: {
+    primary: 'rgb(255, 45, 85)',
+    background: 'rgb(242, 242, 242)',
+    card: 'rgb(255, 255, 255)',
+    text: 'rgb(28, 28, 30)',
+    border: 'rgb(199, 199, 204)',
+    notification: 'rgb(255, 69, 58)',
+  },
+};
 
 const App = () => {
   return (
-    <View>
-      {/* <HomePage /> */}
-      {/* <Text style={{color: 'red'}}>Hello</Text> */}
+    <NavigationContainer theme={DarkTheme}>
       <BottomNavigation />
-    </View>
+    </NavigationContainer>
   );
 };
 
 const style = StyleSheet.create({
-  button: {
-    margin: 10,
-    width: 70,
-    alignSelf: 'center',
-  },
-  bottom: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  text: {
-    color: '#fff',
+  bar: {
+    backgroundColor: 'red',
   },
 });
 

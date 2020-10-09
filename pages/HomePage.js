@@ -7,66 +7,71 @@ import {
   SafeAreaView,
   Pressable,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import Header from '../components/Header';
 import CardComponent from '../components/CardComponent';
 import {PopularMovies, TopRatedMovies} from '../api/movieApi';
+// YellowBox.ignoreWarnings(['Remote debugger']);
 
 function HomePage() {
-  const size = 5;
+  const popularMovies = PopularMovies().movie;
+  const topRatedMovies = TopRatedMovies().movie;
 
-  const popularMovies = PopularMovies();
-  const topRatedMovies = TopRatedMovies();
+  //Popular Movie
+  let popular;
+  if (PopularMovies().loading === true) {
+    popular = <ActivityIndicator size="large" color="#0000ff" />;
+  } else {
+    popular = (
+      <View style={style.card_container}>
+        <ScrollView horizontal style={style.popular_movie}>
+          {popularMovies.slice(0, 5).map((movie) => (
+            <CardComponent movie={movie} key={movie.id} />
+          ))}
+        </ScrollView>
+      </View>
+    );
+  }
+
+  // Top Rated Movie
+  let top_rated;
+  if (TopRatedMovies().loading === true) {
+    top_rated = <ActivityIndicator size="large" color="#0000ff" />;
+  } else {
+    top_rated = (
+      <View style={style.card_container}>
+        <ScrollView horizontal style={style.popular_movie}>
+          {topRatedMovies.slice(0, 5).map((movie) => (
+            <CardComponent movie={movie} key={movie.id} />
+          ))}
+        </ScrollView>
+      </View>
+    );
+  }
 
   return (
-    // <SafeAreaView style={{}}>
     <View>
       <Header judul={'Movie App'}></Header>
       <View style={style.body}>
-        <ScrollView contentContainerStyle={{paddingBottom: 200}}>
-          <View style={style.card_container}>
-            <View style={style.tag}>
-              <Text style={style.popular_text}>Popular Movie </Text>
-              <Pressable onPress={() => Alert.alert('Click')}>
-                <Text style={style.popular_text}>More </Text>
-              </Pressable>
-            </View>
-            <ScrollView horizontal style={style.popular_movie}>
-              {popularMovies.slice(0, size).map((movie) => (
-                <CardComponent movie={movie} key={movie.id} />
-              ))}
-            </ScrollView>
+        <ScrollView contentContainerStyle={{paddingBottom: 300}}>
+          <View style={style.tag}>
+            <Text style={style.popular_text}>Popular Movie </Text>
+            <Pressable onPress={() => Alert.alert('Click')}>
+              <Text style={style.popular_text}>More </Text>
+            </Pressable>
           </View>
-          <View style={style.card_container}>
-            <View style={style.tag}>
-              <Text style={style.popular_text}>Top Rated Movie </Text>
-              <Pressable onPress={() => Alert.alert('Click')}>
-                <Text style={style.popular_text}>More </Text>
-              </Pressable>
-            </View>
-            <ScrollView horizontal style={style.popular_movie}>
-              {topRatedMovies.slice(0, 6).map((movie) => (
-                <CardComponent movie={movie} key={movie.id} />
-              ))}
-            </ScrollView>
+          <View style={{flex: 1}}>{popular}</View>
+          <View style={style.tag}>
+            <Text style={style.popular_text}>Top Rated Movie </Text>
+            <Pressable onPress={() => Alert.alert('Click')}>
+              <Text style={style.popular_text}>More </Text>
+            </Pressable>
           </View>
-          <View style={style.card_container}>
-            <View style={style.tag}>
-              <Text style={style.popular_text}>Top Rated Movie </Text>
-              <Pressable onPress={() => Alert.alert('Click')}>
-                <Text style={style.popular_text}>More </Text>
-              </Pressable>
-            </View>
-            <ScrollView horizontal style={style.popular_movie}>
-              {topRatedMovies.slice(0, 7).map((movie) => (
-                <CardComponent movie={movie} key={movie.id} />
-              ))}
-            </ScrollView>
-          </View>
+          <View style={{flex: 1}}>{top_rated}</View>
         </ScrollView>
       </View>
     </View>
-    // </SafeAreaView>
   );
 }
 

@@ -12,7 +12,6 @@ import {
 import Header from '../components/Header';
 import CardComponent from '../components/CardComponent';
 import {PopularMovies, TopRatedMovies} from '../api/movieApi';
-// YellowBox.ignoreWarnings(['Remote debugger']);
 
 function HomePage() {
   const popularMovies = PopularMovies().movie;

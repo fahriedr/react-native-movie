@@ -7,13 +7,16 @@
  */
 
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import HomePage from './pages/HomePage';
+import BottomNavigation from './components/BottomNavigation';
 
 const App = () => {
   return (
     <View>
-      <HomePage />
+      {/* <HomePage /> */}
+      {/* <Text style={{color: 'red'}}>Hello</Text> */}
+      <BottomNavigation />
     </View>
   );
 };
@@ -29,6 +32,9 @@ const style = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+  },
+  text: {
+    color: '#fff',
   },
 });
 

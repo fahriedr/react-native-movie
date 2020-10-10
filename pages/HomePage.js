@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -28,7 +28,20 @@ function HomePage() {
   const topRatedMovies = TopRatedMovies().movie;
   const nowPlayingMovies = NowPlayingMovies().movie;
 
-  console.log(nowPlayingMovies);
+  let now_playing;
+  if (NowPlayingMovies().loading === true) {
+    now_playing = <ActivityIndicator size="large" color="#0000ff" />;
+  } else {
+    now_playing = (
+      <View style={style.card_container}>
+        <ScrollView horizontal style={style.popular_movie}>
+          {nowPlayingMovies.slice(0, 5).map((movie) => (
+            <CardComponent movie={movie} key={movie.id} />
+          ))}
+        </ScrollView>
+      </View>
+    );
+  }
 
   //Popular Movie
   let popular;
@@ -67,15 +80,14 @@ function HomePage() {
       <Header judul={'Movie App'}></Header>
       <View style={style.body}>
         <ScrollView contentContainerStyle={{paddingBottom: 130}}>
-          {/* <View style={{flex: 1}}>
-            <Carousel
-              layout={'default'}
-              data={nowPlayingMovies.slice(0, 5)}
-              renderItem={renderCarousel(nowPlayingMovies)}
-              sliderWidth={300}
-              itemWidth={300}
-            />
-          </View> */}
+          <View style={{flex: 1}}></View>
+          <View style={style.tag}>
+            <Text style={style.popular_text}>Now Playing Movie </Text>
+            <Pressable onPress={() => Alert.alert('Click')}>
+              <Text style={style.popular_text}>More </Text>
+            </Pressable>
+          </View>
+          <View style={{flex: 1}}>{now_playing}</View>
           <View style={style.tag}>
             <Text style={style.popular_text}>Popular Movie </Text>
             <Pressable onPress={() => Alert.alert('Click')}>
@@ -83,13 +95,6 @@ function HomePage() {
             </Pressable>
           </View>
           <View style={{flex: 1}}>{popular}</View>
-          <View style={style.tag}>
-            <Text style={style.popular_text}>Top Rated Movie </Text>
-            <Pressable onPress={() => Alert.alert('Click')}>
-              <Text style={style.popular_text}>More </Text>
-            </Pressable>
-          </View>
-          <View style={{flex: 1}}>{top_rated}</View>
           <View style={style.tag}>
             <Text style={style.popular_text}>Top Rated Movie </Text>
             <Pressable onPress={() => Alert.alert('Click')}>

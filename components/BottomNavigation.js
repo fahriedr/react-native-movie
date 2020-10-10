@@ -6,6 +6,7 @@ import {
   faHome,
   faSearch,
   faUser,
+  faHeart,
 } from '@fortawesome/free-solid-svg-icons';
 import HomePage from '../pages/HomePage';
 import Favorites from '../pages/Favorites';
@@ -18,7 +19,7 @@ const Tab = createBottomTabNavigator();
 export class BottomNavigation extends Component {
   render() {
     return (
-      <Tab.Navigator tabBarOptions={{activeTintColor: '#0a0a19'}}>
+      <Tab.Navigator tabBarOptions={{activeTintColor: '#fff'}}>
         <Tab.Screen
           name="Home"
           component={HomePage}
@@ -43,7 +44,7 @@ export class BottomNavigation extends Component {
           component={Favorites}
           options={{
             tabBarIcon: ({color, size}) => (
-              <FontAwesomeIcon icon={faBook} color={color} size={20} />
+              <FontAwesomeIcon icon={faHeart} color={color} size={20} />
             ),
           }}
         />

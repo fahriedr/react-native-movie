@@ -25,7 +25,7 @@ const MyTheme = {
 
 const App = () => {
   return (
-    <NavigationContainer theme={DarkTheme}>
+    <NavigationContainer theme={MyTheme}>
       <BottomNavigation />
     </NavigationContainer>
   );

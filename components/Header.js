@@ -1,81 +1,3 @@
-// import React, {useState} from 'react';
-// import {StyleSheet, View, Text} from 'react-native';
-// import {TextInput} from 'react-native-paper';
-// import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-// import {faSearch} from '@fortawesome/free-solid-svg-icons';
-
-// const Header = ({judul, props}) => {
-//   const [value, setValue] = useState('');
-
-//   handlerChange = (e) => {};
-//   if (judul === null) {
-//     return (
-//       <View style={style.header}>
-//         <View style={style.searchSection}>
-//           <FontAwesomeIcon icon={faSearch} style={style.icon} size={22} />
-//           <TextInput
-//             style={style.input}
-//             underlineColorAndroid={'rgba(0,0,0,0)'}
-//             placeholder={'Search here'}
-//             autoCorrect={false}
-//             onChange={handlerChange()}
-//           />
-//         </View>
-//       </View>
-//     );
-//   } else {
-//     return (
-//       <View style={style.header}>
-//         <View style={style.headerContent}>
-//           <Text style={style.headerText}>{judul}</Text>
-//         </View>
-//       </View>
-//     );
-//   }
-// };
-
-// const style = StyleSheet.create({
-//   header: {
-//     width: '100%',
-//     height: 60,
-//     backgroundColor: '#0a0a19',
-//     elevation: 15,
-//     justifyContent: 'center',
-//   },
-//   headerContent: {
-//     margin: 10,
-//   },
-//   headerText: {
-//     color: '#fff',
-//     fontSize: 18,
-//     fontWeight: 'bold',
-//     marginLeft: 5,
-//   },
-//   searchSection: {
-//     alignSelf: 'center',
-//     marginHorizontal: 24,
-//     height: 40,
-//     backgroundColor: '#fff',
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     borderRadius: 4,
-//     paddingRight: 4,
-//   },
-//   icon: {
-//     // backgroundColor: 'blue',
-//     height: '100%',
-//     marginLeft: 6,
-//   },
-//   input: {
-//     width: '100%',
-//     backgroundColor: '#fff',
-//     padding: 2,
-//     height: 30,
-//   },
-// });
-
-// export default Header;
-
 import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {TextInput} from 'react-native-paper';
@@ -148,7 +70,8 @@ const style = StyleSheet.create({
   },
   searchSection: {
     alignSelf: 'center',
-    marginHorizontal: 24,
+    marginHorizontal: 28,
+    marginVertical: 8,
     height: 40,
     backgroundColor: '#fff',
     flexDirection: 'row',

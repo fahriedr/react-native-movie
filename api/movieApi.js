@@ -52,4 +52,34 @@ const TopRatedMovies = () => {
   return {movie: movie, loading: loading};
 };
 
-export {PopularMovies, TopRatedMovies, NowPlayingMovies};
+var SearchMovie = async (query) => {
+  // let state = {
+  //   movie: [],
+  // };
+
+  let movie = [];
+
+  await Axios.get(
+    `${BASE_URL}/search/movie/?query=${query}&api_key=${API_KEY}&page=1`,
+  ).then((response) => {
+    movie = response;
+  });
+
+  return movie;
+
+  // movie = response.data.results.length;
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   const data = Axios.get(
+  //     `${BASE_URL}/search/movie/?query=${'avenger'}&api_key=${API_KEY}&page=1`,
+  //   ).then((response) => [setMovie(response.data.results), setLoading(false)]);
+  //   return () => {
+  //     data;
+  //   };
+  // }, []);
+
+  // return state.movie;
+};
+
+export {PopularMovies, TopRatedMovies, NowPlayingMovies, SearchMovie};

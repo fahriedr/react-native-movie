@@ -13,7 +13,6 @@ import {
 import Header from '../components/Header';
 import CardComponent from '../components/CardComponent';
 import {PopularMovies, TopRatedMovies, NowPlayingMovies} from '../api/movieApi';
-import Carousel from 'react-native-snap-carousel';
 
 var renderCarousel = ({image, index}) => {
   return (

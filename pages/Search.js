@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -7,64 +7,73 @@ import {
   Image,
   Dimensions,
   ScrollView,
+  Alert,
 } from 'react-native';
 import Header from '../components/Header';
 import {SearchMovie} from '../api/movieApi';
-const {width} = Dimensions.get('window');
+import {TextInput} from 'react-native-paper';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faSearch} from '@fortawesome/free-solid-svg-icons';
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
-export class Search extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      query: '',
-      movies: [],
-    };
-  }
+function Search() {
+  const [query, setQuery] = useState('');
+  const [movies, setMovies] = useState([]);
 
-  componentDidMount = (e) => {
-    SearchMovie(e)
-      .then((response) => {
-        this.setState({movies: response.data.results});
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  console.log(movies);
 
-  handlerChange = (e) => {
-    this.setState({query: e});
-  };
-
-  render() {
-    console.log(this.state.movies);
-    console.log(this.state.query);
-    const image = {uri: `https://image.tmdb.org/t/p/w185`};
-    return (
-      <View>
-        <Header judul={null} data={this.componentDidMount} />
-        <View style={style.body}>
-          <ScrollView style={{flex: 1}}>
-            {this.state.movies.slice(0, 5).map((movies) => (
-              <View style={style.card_container}>
+  return (
+    <View>
+      <Header judul={'Search Movie'} />
+      <View style={style.body}>
+        <View style={style.search_bar}>
+          <TextInput
+            style={style.text_input}
+            placeholder="Search"
+            underlineColorAndroid="transparent"
+            onChangeText={(val) => setQuery(val)}
+          />
+          <View>
+            <Pressable
+              style={style.search_button}
+              onPress={() =>
+                SearchMovie(query).then((response) => {
+                  setMovies(response.data.results);
+                })
+              }
+              android_ripple={{color: 'grey', borderless: 4}}>
+              <FontAwesomeIcon icon={faSearch} />
+            </Pressable>
+          </View>
+        </View>
+        <ScrollView style={{flex: 1}}>
+          {movies.map((movie) => (
+            <Pressable onPress={() => Alert.alert(movie.title)}>
+              <View style={style.card_container} key={movie.id}>
                 <View style={style.card}>
-                  <Image
-                    source={{
-                      uri: `https://image.tmdb.org/t/p/w185${movies.poster_path}`,
-                    }}
-                    style={style.image}
-                  />
+                  {movie.poster_path && (
+                    <Image
+                      style={style.image}
+                      source={{
+                        uri: `https://image.tmdb.org/t/p/w185${movie.poster_path}`,
+                      }}
+                    />
+                  )}
+                  {!movie.poster_path && (
+                    <Image
+                      style={style.image}
+                      source={require('../assets/img/no-image-available.jpeg')}
+                    />
+                  )}
                 </View>
               </View>
-              // <Text
-              //   style={
-              //     style.text
-              //   }>{`https://image.tmdb.org/t/p/w185${movies.poster_path}`}</Text>
-            ))}
-          </ScrollView>
-        </View>
+            </Pressable>
+          ))}
+        </ScrollView>
       </View>
-    );
-  }
+    </View>
+  );
 }
 
 const style = StyleSheet.create({
@@ -74,8 +83,36 @@ const style = StyleSheet.create({
     backgroundColor: '#0a0a19',
     position: 'relative',
   },
+  search_bar: {
+    backgroundColor: 'grey',
+    height: 45,
+    marginHorizontal: 15,
+    marginVertical: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  text_input: {
+    width: '85%',
+    backgroundColor: 'transparent',
+    borderColor: 'grey',
+    borderWidth: 1,
+    height: 40,
+    borderRadius: 4,
+    justifyContent: 'space-evenly',
+  },
   text: {
     color: '#fff',
+  },
+  search_button: {
+    marginLeft: 4,
+    backgroundColor: '#2ff9f6',
+    height: 45,
+    width: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopRightRadius: 4,
+    borderBottomRightRadius: 4,
   },
   card_container: {
     margin: 10,

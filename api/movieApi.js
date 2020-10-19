@@ -58,6 +58,7 @@ var SearchMovie = async (query) => {
   // };
 
   let movie = [];
+  let loading = true;
 
   await Axios.get(
     `${BASE_URL}/search/movie/?query=${query}&api_key=${API_KEY}&page=1`,

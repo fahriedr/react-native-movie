@@ -11,7 +11,7 @@ import {
 import HomePage from '../pages/HomePage';
 import Favorites from '../pages/Favorites';
 import Search from '../pages/Search';
-import Account from '../pages/Account';
+import ProfilePage from '../pages/ProfilePage';
 
 // const Tab = createMaterialBottomTabNavigator();
 const Tab = createBottomTabNavigator();
@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator();
 export class BottomNavigation extends Component {
   render() {
     return (
-      <Tab.Navigator tabBarOptions={{activeTintColor: '#fff'}}>
+      <Tab.Navigator tabBarOptions={{activeTintColor: '#fff'}} shifting={true}>
         <Tab.Screen
           name="Home"
           component={HomePage}
@@ -50,7 +50,7 @@ export class BottomNavigation extends Component {
         />
         <Tab.Screen
           name="Account"
-          component={Account}
+          component={ProfilePage}
           options={{
             tabBarIcon: ({color, size}) => (
               <FontAwesomeIcon icon={faUser} color={color} size={20} />

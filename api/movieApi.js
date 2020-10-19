@@ -61,26 +61,12 @@ var SearchMovie = async (query) => {
   let loading = true;
 
   await Axios.get(
-    `${BASE_URL}/search/movie/?query=${query}&api_key=${API_KEY}&page=1`,
+    `${BASE_URL}/search/movie/?query=${query}&api_key=${API_KEY}  `,
   ).then((response) => {
     movie = response;
   });
 
   return movie;
-
-  // movie = response.data.results.length;
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   const data = Axios.get(
-  //     `${BASE_URL}/search/movie/?query=${'avenger'}&api_key=${API_KEY}&page=1`,
-  //   ).then((response) => [setMovie(response.data.results), setLoading(false)]);
-  //   return () => {
-  //     data;
-  //   };
-  // }, []);
-
-  // return state.movie;
 };
 
 export {PopularMovies, TopRatedMovies, NowPlayingMovies, SearchMovie};

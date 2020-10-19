@@ -8,22 +8,28 @@
 
 import * as React from 'react';
 import BottomNavigation from './components/BottomNavigation';
+import BottomNavigationPaper from './components/BottomNavigationPaper';
 import {NavigationContainer} from '@react-navigation/native';
-import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
+import {Provider as PaperProvider, DefaultTheme} from 'react-native-paper';
 
-const MyTheme = {
+const theme = {
   ...DefaultTheme,
+  roundness: 2,
   colors: {
     ...DefaultTheme.colors,
-    primary: 'rgb(255, 45, 85)',
+    primary: '#100e2a',
+    accent: '#173B57',
   },
 };
 
 const App = () => {
   return (
-    <NavigationContainer theme={DefaultTheme}>
-      <BottomNavigation />
-    </NavigationContainer>
+    <PaperProvider theme={theme}>
+      <NavigationContainer>
+        {/* <BottomNavigation /> */}
+        <BottomNavigationPaper />
+      </NavigationContainer>
+    </PaperProvider>
   );
 };
 

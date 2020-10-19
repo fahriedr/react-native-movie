@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-function Account() {
+function ProfilePage() {
   return (
     <View>
       <Text>Account</Text>
@@ -9,4 +9,4 @@ function Account() {
   );
 }
 
-export default Account;
+export default ProfilePage;

@@ -55,9 +55,16 @@ const style = StyleSheet.create({
   header: {
     width: '100%',
     height: 60,
-    backgroundColor: '#0a0a19',
-    elevation: 15,
+    backgroundColor: '#100e2a',
     justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
   },
   headerContent: {
     margin: 10,

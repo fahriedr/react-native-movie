@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faStar} from '@fortawesome/free-solid-svg-icons';
-const {width} = Dimensions.get('window');
+const width = Dimensions.get('window').width;
 
 var month_name = function (dt) {
   let newDt = new Date(dt);
@@ -72,8 +72,8 @@ function CardComponent({movie}) {
 
 const style = StyleSheet.create({
   card: {
-    width: width / 3,
-    height: 230,
+    width: width / 3.3,
+    height: 200,
     borderRadius: 8,
     marginHorizontal: 15,
     marginVertical: 5,

@@ -13,7 +13,6 @@ import {
 } from 'react-native';
 import Header from '../components/Header';
 import {SearchMovie} from '../api/movieApi';
-// import {TextInput} from 'react-native-paper';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faSearch, faStar} from '@fortawesome/free-solid-svg-icons';
 const width = Dimensions.get('window').width;
@@ -112,7 +111,7 @@ function Search() {
     search_movie = (
       <View>
         {movies.map((movie) => (
-          <Pressable onPress={() => Alert.alert(movie.title)} key={movie.id}>
+          <Pressable onPress={() => Alert.alert('Hwhw')} key={movie.id}>
             <View style={style.card_container}>
               <View style={style.card}>
                 {movie.poster_path && (
@@ -153,7 +152,7 @@ function Search() {
                 <View style={{flexDirection: 'row'}}>
                   {movie.genre_ids.map((genres) => (
                     <Text key={genres} style={{color: '#fff'}}>
-                      {genre.name}
+                      {genres}
                     </Text>
                   ))}
                 </View>
@@ -169,22 +168,28 @@ function Search() {
     <View>
       <Header judul={'Search Movie'} />
       <View style={style.body}>
-        <View style={style.search_bar}>
-          <TextInput
-            style={style.text_input}
-            placeholder="Search"
-            underlineColorAndroid="transparent"
-            autoCorrect={false}
-            onChangeText={(val) => setQuery(val)}
-          />
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={style.search_bar}>
+            <TextInput
+              style={style.text_input}
+              placeholder="Search"
+              underlineColorAndroid="transparent"
+              autoCorrect={false}
+              onChangeText={(val) => setQuery(val)}
+            />
+          </View>
           <View>
             <Pressable
               style={style.search_button}
               onPress={() => [
                 setLoading(true),
-                SearchMovie(query).then((response) => {
-                  [setMovies(response.data.results), setLoading(false)];
-                }),
+                SearchMovie(query)
+                  .then((response) => {
+                    [setMovies(response.data.results), setLoading(false)];
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  }),
               ]}
               android_ripple={{color: 'grey', borderless: 4}}>
               <FontAwesomeIcon icon={faSearch} />
@@ -205,15 +210,16 @@ const style = StyleSheet.create({
     position: 'relative',
   },
   search_bar: {
-    width: '90%',
+    width: '80%',
     backgroundColor: 'grey',
     height: 45,
-    marginHorizontal: 15,
+    marginLeft: 15,
     marginVertical: 4,
     flexDirection: 'row',
     alignSelf: 'center',
     alignItems: 'center',
-    borderRadius: 8,
+    borderTopLeftRadius: 8,
+    borderBottomLeftRadius: 8,
   },
   text_input: {
     width: '85%',
@@ -229,14 +235,13 @@ const style = StyleSheet.create({
     color: '#fff',
   },
   search_button: {
-    marginLeft: 4,
     backgroundColor: '#f4d804',
     height: 45,
-    width: 50,
+    width: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    borderTopRightRadius: 4,
-    borderBottomRightRadius: 4,
+    borderTopRightRadius: 8,
+    borderBottomRightRadius: 8,
   },
   card_container: {
     flexDirection: 'row',

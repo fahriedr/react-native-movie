@@ -7,7 +7,6 @@
  */
 
 import * as React from 'react';
-import BottomNavigation from './components/BottomNavigation';
 import BottomNavigationPaper from './components/BottomNavigationPaper';
 import {NavigationContainer} from '@react-navigation/native';
 import {Provider as PaperProvider, DefaultTheme} from 'react-native-paper';
@@ -26,7 +25,6 @@ const App = () => {
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer>
-        {/* <BottomNavigation /> */}
         <BottomNavigationPaper />
       </NavigationContainer>
     </PaperProvider>

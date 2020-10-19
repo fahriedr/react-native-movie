@@ -4,6 +4,7 @@ import HomePage from '../pages/HomePage';
 import Favorites from '../pages/Favorites';
 import Search from '../pages/Search';
 import ProfilePage from '../pages/ProfilePage';
+import SearchStack from '../routes/SearchStack';
 
 function BottomNavigationPaper() {
   const [index, setIndex] = React.useState(0);

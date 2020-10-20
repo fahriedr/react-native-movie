@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Component} from 'react';
 import Axios from 'axios';
 import {API_KEY, BASE_URL} from '@env';
 import {set} from 'react-native-reanimated';
@@ -53,10 +53,6 @@ const TopRatedMovies = () => {
 };
 
 var SearchMovie = async (query) => {
-  // let state = {
-  //   movie: [],
-  // };
-
   let movie = [];
   let loading = true;
 
@@ -69,4 +65,5 @@ var SearchMovie = async (query) => {
   return movie;
 };
 
-export {PopularMovies, TopRatedMovies, NowPlayingMovies, SearchMovie};
+// export default MovieApi;
+export {NowPlayingMovies, PopularMovies, TopRatedMovies, SearchMovie};

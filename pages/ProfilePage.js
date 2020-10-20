@@ -1,12 +1,9 @@
 import React from 'react';
 import {View, Text} from 'react-native';
+import {CardCarousel} from '../components/CardCarousel';
 
 function ProfilePage() {
-  return (
-    <View>
-      <Text>Account</Text>
-    </View>
-  );
+  return <CardCarousel />;
 }
 
 export default ProfilePage;

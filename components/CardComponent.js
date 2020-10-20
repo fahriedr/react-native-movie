@@ -46,8 +46,6 @@ function CardComponent({movie, navigation}) {
     title = title.substring(0, max_length) + '...';
   }
 
-  console.log(navigation);
-
   return (
     <View>
       <Pressable

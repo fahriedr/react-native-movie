@@ -31,7 +31,7 @@ export default function BottomNavigation({navigation}) {
         inactiveColor="#95a5a6"
         options={{
           tabBarIcon: ({color, size}) => (
-            <FontAwesomeIcon icon={faHome} color={color} size={18} />
+            <FontAwesomeIcon icon={faHome} color={color} size={20} />
           ),
         }}
       />

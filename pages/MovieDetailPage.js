@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-function MovieDetailPage() {
+function MovieDetailPage({route, navigation}) {
+  const {id, title} = route.params;
   return (
     <View>
-      <Text>Detail Movie</Text>
+      <Text>{title}</Text>
     </View>
   );
 }

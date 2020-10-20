@@ -7,9 +7,11 @@
  */
 
 import * as React from 'react';
+import BottomNavigation from './components/BottomNavigation';
 import BottomNavigationPaper from './components/BottomNavigationPaper';
 import {NavigationContainer} from '@react-navigation/native';
 import {Provider as PaperProvider, DefaultTheme} from 'react-native-paper';
+import HomeStack from './routes/HomeStack';
 
 const theme = {
   ...DefaultTheme,
@@ -23,11 +25,9 @@ const theme = {
 
 const App = () => {
   return (
-    <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <BottomNavigationPaper />
-      </NavigationContainer>
-    </PaperProvider>
+    <NavigationContainer theme={theme}>
+      <HomeStack />
+    </NavigationContainer>
   );
 };
 

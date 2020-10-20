@@ -18,7 +18,7 @@ import {faSearch, faStar} from '@fortawesome/free-solid-svg-icons';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-function Search() {
+function Search({navigation}) {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -111,7 +111,15 @@ function Search() {
     search_movie = (
       <View>
         {movies.map((movie) => (
-          <Pressable onPress={() => Alert.alert('Hwhw')} key={movie.id}>
+          <Pressable
+            onPress={() =>
+              navigation.navigate('MovieDetail', {
+                id: movie.id,
+                title: movie.title,
+                navigation: navigation,
+              })
+            }
+            key={movie.id}>
             <View style={style.card_container}>
               <View style={style.card}>
                 {movie.poster_path && (
@@ -183,13 +191,9 @@ function Search() {
               style={style.search_button}
               onPress={() => [
                 setLoading(true),
-                SearchMovie(query)
-                  .then((response) => {
-                    [setMovies(response.data.results), setLoading(false)];
-                  })
-                  .catch((error) => {
-                    console.log(error);
-                  }),
+                SearchMovie(query).then((response) => {
+                  [setMovies(response.data.results), setLoading(false)];
+                }),
               ]}
               android_ripple={{color: 'grey', borderless: 4}}>
               <FontAwesomeIcon icon={faSearch} />

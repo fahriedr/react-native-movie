@@ -4,6 +4,7 @@ import HomePage from '../pages/HomePage';
 import Favorites from '../pages/Favorites';
 import Search from '../pages/Search';
 import ProfilePage from '../pages/ProfilePage';
+import HomeStack from '../routes/HomeStack';
 import SearchStack from '../routes/SearchStack';
 
 function BottomNavigationPaper() {
@@ -16,8 +17,8 @@ function BottomNavigationPaper() {
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    home: HomePage,
-    search: Search,
+    home: HomeStack,
+    search: SearchStack,
     favorites: Favorites,
     profile: ProfilePage,
   });

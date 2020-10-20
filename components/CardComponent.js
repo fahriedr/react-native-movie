@@ -31,7 +31,7 @@ var month_name = function (dt) {
   return mlist[newDt.getMonth()];
 };
 
-function CardComponent({movie}) {
+function CardComponent({movie, navigation}) {
   const image = {uri: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`};
   const max_length = 18;
 
@@ -46,11 +46,18 @@ function CardComponent({movie}) {
     title = title.substring(0, max_length) + '...';
   }
 
-  // console.log(movie);
+  console.log(navigation);
 
   return (
     <View>
-      <Pressable onPress={() => Alert.alert(movie.title)}>
+      <Pressable
+        onPress={() =>
+          navigation.navigate('MovieDetail', {
+            id: movie.id,
+            title: movie.title,
+            navigation: navigation,
+          })
+        }>
         <View style={style.card}>
           <Image source={image} style={style.image} />
         </View>

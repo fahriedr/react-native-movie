@@ -62,15 +62,11 @@ var SearchMovie = async (query) => {
 
   await Axios.get(
     `${BASE_URL}/search/movie/?query=${query}&api_key=${API_KEY}  `,
-  )
-    .then((response) => {
-      return (movie = response);
-    })
-    .catch(function (error) {
-      return error;
-    });
+  ).then((response) => {
+    movie = response;
+  });
 
-  // return movie;
+  return movie;
 };
 
 export {PopularMovies, TopRatedMovies, NowPlayingMovies, SearchMovie};

@@ -14,15 +14,7 @@ import Header from '../components/Header';
 import CardComponent from '../components/CardComponent';
 import {PopularMovies, TopRatedMovies, NowPlayingMovies} from '../api/movieApi';
 
-var renderCarousel = ({image, index}) => {
-  return (
-    <View>
-      <Image source={`https://image.tmdb.org/t/p/w185/${image}`} />
-    </View>
-  );
-};
-
-function HomePage() {
+function HomePage({navigation}) {
   const popularMovies = PopularMovies().movie;
   const topRatedMovies = TopRatedMovies().movie;
   const nowPlayingMovies = NowPlayingMovies().movie;
@@ -35,7 +27,11 @@ function HomePage() {
       <View style={style.card_container}>
         <ScrollView horizontal style={style.popular_movie}>
           {nowPlayingMovies.slice(0, 5).map((movie) => (
-            <CardComponent movie={movie} key={movie.id} />
+            <CardComponent
+              movie={movie}
+              key={movie.id}
+              navigation={navigation}
+            />
           ))}
         </ScrollView>
       </View>
@@ -51,7 +47,11 @@ function HomePage() {
       <View style={style.card_container}>
         <ScrollView horizontal style={style.popular_movie}>
           {popularMovies.slice(0, 5).map((movie) => (
-            <CardComponent movie={movie} key={movie.id} />
+            <CardComponent
+              movie={movie}
+              key={movie.id}
+              navigation={navigation}
+            />
           ))}
         </ScrollView>
       </View>
@@ -67,7 +67,11 @@ function HomePage() {
       <View style={style.card_container}>
         <ScrollView horizontal style={style.popular_movie}>
           {topRatedMovies.slice(0, 5).map((movie) => (
-            <CardComponent movie={movie} key={movie.id} />
+            <CardComponent
+              movie={movie}
+              key={movie.id}
+              navigation={navigation}
+            />
           ))}
         </ScrollView>
       </View>

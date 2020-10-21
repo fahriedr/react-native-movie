@@ -55,7 +55,8 @@ function CardComponent({movie, navigation}) {
             title: movie.title,
             navigation: navigation,
           })
-        }>
+        }
+        android_ripple={{color: 'grey', borderless: 4}}>
         <View style={style.card}>
           <Image source={image} style={style.image} />
         </View>

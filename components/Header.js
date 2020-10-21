@@ -74,6 +74,7 @@ const style = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginLeft: 5,
+    fontFamily: 'Montserrat-Regular',
   },
   searchSection: {
     alignSelf: 'center',

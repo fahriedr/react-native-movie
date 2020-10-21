@@ -8,11 +8,11 @@ import {
   Pressable,
   Alert,
   ActivityIndicator,
-  Image,
 } from 'react-native';
 import Header from '../components/Header';
 import CardComponent from '../components/CardComponent';
 import {PopularMovies, TopRatedMovies, NowPlayingMovies} from '../api/movieApi';
+import {CardCarousel} from '../components/CardCarousel';
 
 function HomePage({navigation}) {
   const popularMovies = PopularMovies().movie;
@@ -79,11 +79,14 @@ function HomePage({navigation}) {
   }
 
   return (
-    <View>
-      <Header judul={'Movie App'}></Header>
+    <SafeAreaView>
+      {/* <View> */}
+      <Header judul={'Movie App'} />
       <View style={style.body}>
-        <ScrollView contentContainerStyle={{paddingBottom: 130}}>
-          <View style={{flex: 1}}></View>
+        <ScrollView
+          style={{flex: 1}}
+          contentContainerStyle={{paddingBottom: 130}}>
+          <CardCarousel navigation={navigation} />
           <View style={style.tag}>
             <Text style={style.popular_text}>Now Playing Movie </Text>
             <Pressable onPress={() => Alert.alert('Click')}>
@@ -107,7 +110,8 @@ function HomePage({navigation}) {
           <View style={{flex: 1}}>{top_rated}</View>
         </ScrollView>
       </View>
-    </View>
+      {/* </View> */}
+    </SafeAreaView>
   );
 }
 
@@ -138,6 +142,7 @@ const style = StyleSheet.create({
     color: '#eee',
     fontSize: 16,
     fontWeight: 'bold',
+    fontFamily: 'Montserrat-Regular',
   },
   popular_movie: {
     flexGrow: 1,

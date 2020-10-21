@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import {CardCarousel} from '../components/CardCarousel';
 
 function ProfilePage() {
-  return <CardCarousel />;
+  return <View>{/* <CardCarousel /> */}</View>;
 }
 
 export default ProfilePage;

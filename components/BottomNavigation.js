@@ -26,12 +26,12 @@ export default function BottomNavigation({navigation}) {
       }}>
       <Tab.Screen
         initialParams={{navigation: navigation}}
-        name="Home"
+        name="Home  "
         component={HomePage}
         inactiveColor="#95a5a6"
         options={{
           tabBarIcon: ({color, size}) => (
-            <FontAwesomeIcon icon={faHome} color={color} size={20} />
+            <FontAwesomeIcon icon={faHome} color={color} size={size} />
           ),
         }}
       />
@@ -40,7 +40,7 @@ export default function BottomNavigation({navigation}) {
         component={Search}
         options={{
           tabBarIcon: ({color, size}) => (
-            <FontAwesomeIcon icon={faSearch} color={color} size={20} />
+            <FontAwesomeIcon icon={faSearch} color={color} size={size} />
           ),
         }}
       />
@@ -49,7 +49,7 @@ export default function BottomNavigation({navigation}) {
         component={Favorites}
         options={{
           tabBarIcon: ({color, size}) => (
-            <FontAwesomeIcon icon={faHeart} color={color} size={20} />
+            <FontAwesomeIcon icon={faHeart} color={color} size={size} />
           ),
         }}
       />
@@ -58,63 +58,10 @@ export default function BottomNavigation({navigation}) {
         component={ProfilePage}
         options={{
           tabBarIcon: ({color, size}) => (
-            <FontAwesomeIcon icon={faUser} color={color} size={20} />
+            <FontAwesomeIcon icon={faUser} color={color} size={size} />
           ),
         }}
       />
     </Tab.Navigator>
   );
 }
-
-// export class BottomNavigation extends Component {
-//   render() {
-//     return (
-//       <Tab.Navigator
-//         tabBarOptions={{
-//           activeTintColor: '#fff',
-//           inactiveTintColor: 'grey',
-//           style: {backgroundColor: '#100e2a'},
-//         }}>
-//         <Tab.Screen
-//           name="Home"
-//           component={HomePage}
-//           inactiveColor="#95a5a6"
-//           options={{
-//             tabBarIcon: ({color, size}) => (
-//               <FontAwesomeIcon icon={faHome} color={color} size={18} />
-//             ),
-//           }}
-//         />
-//         <Tab.Screen
-//           name="Search"
-//           component={Search}
-//           options={{
-//             tabBarIcon: ({color, size}) => (
-//               <FontAwesomeIcon icon={faSearch} color={color} size={20} />
-//             ),
-//           }}
-//         />
-//         <Tab.Screen
-//           name="Favorites"
-//           component={Favorites}
-//           options={{
-//             tabBarIcon: ({color, size}) => (
-//               <FontAwesomeIcon icon={faHeart} color={color} size={20} />
-//             ),
-//           }}
-//         />
-//         <Tab.Screen
-//           name="Account"
-//           component={ProfilePage}
-//           options={{
-//             tabBarIcon: ({color, size}) => (
-//               <FontAwesomeIcon icon={faUser} color={color} size={20} />
-//             ),
-//           }}
-//         />
-//       </Tab.Navigator>
-//     );
-//   }
-// }
-
-// export default BottomNavigation;

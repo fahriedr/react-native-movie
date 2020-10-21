@@ -1,179 +1,110 @@
 import React, {Component, useState} from 'react';
-import {View, Text, SafeAreaView, Image, Dimensions} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  Dimensions,
+  ImageBackground,
+  Pressable,
+  Alert,
+} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {PopularMovies} from '../api/movieApi';
 const {width} = Dimensions.get('window').width;
 
+const _onPressCarousel = (navigation, movie) => {
+  navigation.navigate('MovieDetail', {
+    id: movie.id,
+    title: movie.title,
+    navigation: navigation,
+  });
+};
+
 var _renderItem = (movie) => {
   const image = {
-    uri: `https://image.tmdb.org/t/p/w780${movie.item.poster_path}`,
+    uri: `https://image.tmdb.org/t/p/w780${movie.item.backdrop_path}`,
   };
-  console.log(movie.item.poster_path);
   return (
     <View
       style={{
+        position: 'absolute',
         backgroundColor: '#fff',
-        borderRadius: 5,
+        borderRadius: 8,
         width: 350,
-        height: 180,
-        padding: 50,
-        marginLeft: 25,
-        marginRight: 25,
+        height: 200,
         alignSelf: 'center',
       }}>
-      <Image source={image} style={{flex: 1, width: '100%', borderRadius: 8}} />
+      <ImageBackground
+        source={image}
+        imageStyle={{borderRadius: 8}}
+        style={{flex: 1, width: '100%'}}
+      />
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          backgroundColor: '#00000090',
+          width: '100%',
+          borderBottomLeftRadius: 8,
+          borderBottomRightRadius: 8,
+        }}>
+        <Text
+          style={{
+            textAlign: 'center',
+            color: '#fff',
+            fontFamily: 'Montserrat-Regular',
+          }}>
+          {movie.item.title}
+        </Text>
+      </View>
     </View>
   );
 };
 
-var pagination = () => {
-  const data = PopularMovies().movie.slice(0, 5);
-  const activeIndex = 0;
-  const movies = data;
-  return (
-    <Pagination
-      dotsLength={movies.length}
-      activeDotIndex={activeIndex}
-      dotStyle={{
-        width: 10,
-        height: 10,
-        borderRadius: 5,
-        marginHorizontal: -2,
-        backgroundColor: '#108CFF',
-      }}
-      inactiveDotStyle={{
-        backgroundColor: '#fff',
-      }}
-      inactiveDotOpacity={0.4}
-      inactiveDotScale={0.6}
-    />
-  );
-};
-
-export function CardCarousel() {
-  const movies = PopularMovies().movie.slice(0, 7);
+export function CardCarousel({navigation}) {
+  const movies = PopularMovies().movie.slice(0, 5);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  let movie_poster;
-  movies.map((movie) => {
-    movie_poster = movie.backdrop_path;
-  });
-
-  //   console.log(movie_poster);
+  console.log(navigation);
 
   return (
-    <SafeAreaView
-      style={{flex: 1, backgroundColor: 'rebeccapurple', paddingTop: 50}}>
-      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+    <View
+      style={{
+        paddingTop: 20,
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        backgroundColor: 'transparent',
+      }}>
+      <TouchableOpacity onPress={_onPressCarousel(navigation, movies)}>
         <Carousel
+          containerCustomStyle={{height: 200}}
           layout={'default'}
-          //   ref={(ref) => (this.carousel = ref)}
           data={movies}
-          sliderWidth={100}
-          itemWidth={410}
+          sliderWidth={380}
+          itemWidth={400}
           renderItem={_renderItem}
           onSnapToItem={(index) => setActiveIndex(index)}
         />
-      </View>
-      {pagination}
-    </SafeAreaView>
+      </TouchableOpacity>
+      <Pagination
+        dotsLength={movies.length}
+        activeDotIndex={activeIndex}
+        dotStyle={{
+          width: 10,
+          height: 10,
+          borderRadius: 5,
+          marginHorizontal: -2,
+          backgroundColor: '#108CFF',
+        }}
+        inactiveDotStyle={{
+          backgroundColor: '#fff',
+        }}
+        inactiveDotOpacity={0.4}
+        inactiveDotScale={0.6}
+      />
+    </View>
   );
 }
-
-// export class CardCarousel extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       activeIndex: 0,
-//       carouselItems: [
-//         {
-//           title: 'Item 1',
-//           text: 'Text 1',
-//         },
-//         {
-//           title: 'Item 2',
-//           text: 'Text 2',
-//         },
-//         {
-//           title: 'Item 3',
-//           text: 'Text 3',
-//         },
-//         {
-//           title: 'Item 4',
-//           text: 'Text 4',
-//         },
-//         {
-//           title: 'Item 5',
-//           text: 'Text 5',
-//         },
-//       ],
-//       movies: [],
-//     };
-//   }
-
-//   componentDidMount() {
-//     const movies = PopularMovies().movie;
-//   }
-
-//   _renderItem = (item, index) => {
-//     return (
-//       <View
-//         style={{
-//           backgroundColor: 'floralwhite',
-//           borderRadius: 5,
-//           width: 350,
-//           height: 180,
-//           padding: 50,
-//           marginLeft: 25,
-//           marginRight: 25,
-//           alignSelf: 'center',
-//         }}>
-//         <Image source={{}} />
-//       </View>
-//     );
-//   };
-
-//   get pagination() {
-//     const {carouselItems, activeIndex} = this.state;
-//     return (
-//       <Pagination
-//         dotsLength={carouselItems.length}
-//         activeDotIndex={activeIndex}
-//         dotStyle={{
-//           width: 10,
-//           height: 10,
-//           borderRadius: 5,
-//           marginHorizontal: -2,
-//           backgroundColor: '#108CFF',
-//         }}
-//         inactiveDotStyle={{
-//           backgroundColor: '#fff',
-//         }}
-//         inactiveDotOpacity={0.4}
-//         inactiveDotScale={0.6}
-//       />
-//     );
-//   }
-
-//   render() {
-//     return (
-//       <SafeAreaView
-//         style={{flex: 1, backgroundColor: 'rebeccapurple', paddingTop: 50}}>
-//         {/* <View style={{flexDirection: 'column'}}> */}
-//         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-//           <Carousel
-//             layout={'default'}
-//             ref={(ref) => (this.carousel = ref)}
-//             data={this.state.carouselItems}
-//             sliderWidth={100}
-//             itemWidth={410}
-//             renderItem={this._renderItem}
-//             onSnapToItem={(index) => this.setState({activeIndex: index})}
-//           />
-//         </View>
-//         {/* </View> */}
-//         {this.pagination}
-//       </SafeAreaView>
-//     );
-//   }
-// }

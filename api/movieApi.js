@@ -52,7 +52,7 @@ const TopRatedMovies = () => {
   return {movie: movie, loading: loading};
 };
 
-var SearchMovie = async (query) => {
+const SearchMovie = async (query) => {
   let movie = [];
   let loading = true;
 
@@ -65,5 +65,30 @@ var SearchMovie = async (query) => {
   return movie;
 };
 
+const DetailMovie = (id) => {
+  const [movie, setMovie] = useState([]);
+  const [cast, setCast] = useState({});
+
+  useEffect(() => {
+    const data = Axios.get(
+      `${BASE_URL}/movie/${id}?api_key=${API_KEY}&append_to_response=credits`,
+    ).then((response) => setMovie(response.data));
+    const data2 = Axios.get(
+      `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}`,
+    ).then((response) => setCast(response.data));
+    return () => {
+      [data, data2];
+    };
+  }, []);
+
+  return {movie: movie, cast: cast};
+};
+
 // export default MovieApi;
-export {NowPlayingMovies, PopularMovies, TopRatedMovies, SearchMovie};
+export {
+  NowPlayingMovies,
+  PopularMovies,
+  TopRatedMovies,
+  SearchMovie,
+  DetailMovie,
+};

@@ -6,6 +6,7 @@ import {
   faSearch,
   faUser,
   faHeart,
+  faBookmark,
 } from '@fortawesome/free-solid-svg-icons';
 import HomePage from '../pages/HomePage';
 import Favorites from '../pages/Favorites';
@@ -22,11 +23,15 @@ export default function BottomNavigation({navigation}) {
       tabBarOptions={{
         activeTintColor: '#fff',
         inactiveTintColor: 'grey',
-        style: {backgroundColor: '#100e2a'},
+        style: {backgroundColor: '#100e2a', height: 50, borderTopColor: 'grey'},
+        showLabel: false,
+      }}
+      tabBarLabel={() => {
+        return null;
       }}>
       <Tab.Screen
         initialParams={{navigation: navigation}}
-        name="Home  "
+        name="Home"
         component={HomePage}
         inactiveColor="#95a5a6"
         options={{
@@ -49,7 +54,7 @@ export default function BottomNavigation({navigation}) {
         component={Favorites}
         options={{
           tabBarIcon: ({color, size}) => (
-            <FontAwesomeIcon icon={faHeart} color={color} size={size} />
+            <FontAwesomeIcon icon={faBookmark} color={color} size={size} />
           ),
         }}
       />

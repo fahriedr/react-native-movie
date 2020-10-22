@@ -88,23 +88,29 @@ function HomePage({navigation}) {
           contentContainerStyle={{paddingBottom: 130}}>
           <CardCarousel navigation={navigation} />
           <View style={style.tag}>
-            <Text style={style.popular_text}>Now Playing Movie </Text>
+            <Text style={style.tag_text}>Now Playing Movie </Text>
             <Pressable onPress={() => Alert.alert('Click')}>
-              <Text style={style.popular_text}>More </Text>
+              <Text style={{color: 'blue', textDecorationLine: 'underline'}}>
+                More{' '}
+              </Text>
             </Pressable>
           </View>
           <View style={{flex: 1}}>{now_playing}</View>
           <View style={style.tag}>
-            <Text style={style.popular_text}>Popular Movie </Text>
+            <Text style={style.tag_text}>Popular Movie </Text>
             <Pressable onPress={() => Alert.alert('Click')}>
-              <Text style={style.popular_text}>More </Text>
+              <Text style={{color: 'blue', textDecorationLine: 'underline'}}>
+                More{' '}
+              </Text>
             </Pressable>
           </View>
           <View style={{flex: 1}}>{popular}</View>
           <View style={style.tag}>
-            <Text style={style.popular_text}>Top Rated Movie </Text>
+            <Text style={style.tag_text}>Top Rated Movie </Text>
             <Pressable onPress={() => Alert.alert('Click')}>
-              <Text style={style.popular_text}>More </Text>
+              <Text style={{color: 'blue', textDecorationLine: 'underline'}}>
+                More{' '}
+              </Text>
             </Pressable>
           </View>
           <View style={{flex: 1}}>{top_rated}</View>
@@ -117,7 +123,7 @@ function HomePage({navigation}) {
 
 const style = StyleSheet.create({
   defaultFontFamily: {
-    fontFamily: 'lucida grande',
+    fontFamily: 'Montserrat-Reguler',
   },
   body: {
     width: '100%',
@@ -138,7 +144,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  popular_text: {
+  tag_text: {
     color: '#eee',
     fontSize: 16,
     fontWeight: 'bold',

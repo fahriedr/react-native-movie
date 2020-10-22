@@ -1,25 +1,16 @@
 import React, {Component, useState} from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Image,
-  Dimensions,
-  ImageBackground,
-  Pressable,
-  Alert,
-} from 'react-native';
+import {View, Text, Dimensions, ImageBackground} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {PopularMovies} from '../api/movieApi';
 const {width} = Dimensions.get('window').width;
 
 const _onPressCarousel = (navigation, movie) => {
-  navigation.navigate('MovieDetail', {
-    id: movie.id,
-    title: movie.title,
-    navigation: navigation,
-  });
+  // navigation.navigate('MovieDetail', {
+  //   id: movie.id,
+  //   title: movie.title,
+  //   navigation: navigation,
+  // });
 };
 
 var _renderItem = (movie) => {
@@ -67,8 +58,6 @@ export function CardCarousel({navigation}) {
   const movies = PopularMovies().movie.slice(0, 5);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  console.log(navigation);
-
   return (
     <View
       style={{
@@ -96,7 +85,7 @@ export function CardCarousel({navigation}) {
           width: 10,
           height: 10,
           borderRadius: 5,
-          marginHorizontal: -2,
+          marginHorizontal: -5,
           backgroundColor: '#108CFF',
         }}
         inactiveDotStyle={{

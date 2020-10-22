@@ -17,7 +17,7 @@ export default function HomeStack({navigation}) {
       <Stack.Screen
         name="MovieDetail"
         component={MovieDetailPage}
-        options={{title: 'false'}}
+        options={{title: false, headerShown: false}}
       />
     </Stack.Navigator>
   );

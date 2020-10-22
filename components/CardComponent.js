@@ -52,7 +52,6 @@ function CardComponent({movie, navigation}) {
         onPress={() =>
           navigation.navigate('MovieDetail', {
             id: movie.id,
-            title: movie.title,
             navigation: navigation,
           })
         }

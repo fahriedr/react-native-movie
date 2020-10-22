@@ -23,8 +23,6 @@ function Search({navigation}) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  console.log(movies);
-
   let search_movie;
   if (loading === true) {
     search_movie = <ActivityIndicator size="large" color="#0000ff" />;
@@ -36,7 +34,6 @@ function Search({navigation}) {
             onPress={() =>
               navigation.navigate('MovieDetail', {
                 id: movie.id,
-                title: movie.title,
                 navigation: navigation,
               })
             }

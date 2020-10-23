@@ -8,13 +8,15 @@ import {
   Dimensions,
   ScrollView,
   Pressable,
+  Button,
+  Alert,
+  Linking,
 } from 'react-native';
 import {DetailMovie} from '../api/movieApi';
 import LinearGradient from 'react-native-linear-gradient';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faArrowLeft, faClock, faStar} from '@fortawesome/free-solid-svg-icons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import CardComponent from '../components/CardComponent';
 const {width} = Dimensions.get('window');
 import _ from 'lodash';
 
@@ -22,8 +24,8 @@ function MovieDetailPage({route, navigation}) {
   const {id} = route.params;
   const movie = DetailMovie(id).movie;
   const credits = DetailMovie(id).cast;
+  const videos = DetailMovie(id).videos;
 
-  console.log(movie);
   const imageBg = {
     uri: `https://image.tmdb.org/t/p/w780${movie.backdrop_path}`,
   };
@@ -33,8 +35,7 @@ function MovieDetailPage({route, navigation}) {
 
   const {genres} = movie;
   const {cast} = credits;
-
-  console.log(cast);
+  const {results} = videos;
 
   return (
     <View style={{width: '100%', height: '100%', backgroundColor: '#0a0a19'}}>
@@ -72,9 +73,9 @@ function MovieDetailPage({route, navigation}) {
           </View>
           <View
             style={{
-              width: 40,
-              height: 40,
-              backgroundColor: '#fff',
+              width: 35,
+              height: 35,
+              backgroundColor: '#00000060',
               borderRadius: 20,
               top: 10,
               left: 20,
@@ -121,12 +122,21 @@ function MovieDetailPage({route, navigation}) {
                   {movie.runtime}min{' '}
                 </Text>
               </View>
-              <View style={{flexDirection: 'row', marginTop: 2}}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  marginTop: 2,
+                  backgroundColor: 'transparent',
+                }}>
                 {_.map(genres, (genre, index) => (
                   <BadgeGenre name={genre.name} key={index} />
                 ))}
               </View>
               <Rating rating={movie.vote_average} />
+              {_.map(_.take(results, 1), (result, index) => (
+                <TrailerButton key={index} result={result} />
+              ))}
             </View>
           </View>
 
@@ -181,6 +191,25 @@ function MovieDetailPage({route, navigation}) {
   );
 }
 
+const TrailerButton = ({result}) => {
+  const URL = `https://www.youtube.com/watch?v=${result.key}`;
+  return (
+    <TouchableOpacity
+      style={{
+        width: width / 3.3,
+        backgroundColor: '#2196F3',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 40,
+        borderRadius: 8,
+        marginTop: 8,
+      }}
+      onPress={() => Linking.openURL(URL)}>
+      <Text style={{color: '#fff'}}>Watch Trailer </Text>
+    </TouchableOpacity>
+  );
+};
+
 const BackButton = ({navigation}) => {
   return (
     <TouchableOpacity
@@ -188,14 +217,14 @@ const BackButton = ({navigation}) => {
         navigation.goBack();
       }}
       style={{
-        width: 40,
-        height: 40,
-        backgroundColor: '#fff',
+        width: 30,
+        height: 30,
+        backgroundColor: 'transparent',
         borderRadius: 20,
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <FontAwesomeIcon icon={faArrowLeft} size={20} />
+      <FontAwesomeIcon icon={faArrowLeft} size={20} color={'white'} />
     </TouchableOpacity>
   );
 };
@@ -208,6 +237,7 @@ const BadgeGenre = ({name}) => {
         marginRight: 4,
         borderRadius: 2,
         paddingHorizontal: 2,
+        marginBottom: 4,
       }}>
       <Text style={{fontSize: 10}}>{name} </Text>
     </View>
@@ -226,8 +256,6 @@ const Rating = ({rating}) => {
 };
 
 const ActorList = ({cast}) => {
-  // const image = { uri : `https://image.tmdb.org/t/p/w185/${casts}`}
-  // console.log(cast);
   return (
     <Pressable>
       <View
@@ -246,7 +274,7 @@ const ActorList = ({cast}) => {
           style={{flex: 1, width: '100%', borderRadius: 8}}
         />
       </View>
-      <View style={{flexDirection: 'column'}}>
+      <View style={{width: width / 3.3, flexDirection: 'column'}}>
         <Text style={{color: '#fff'}}>{cast.name}</Text>
         <Text style={{color: '#fff'}}>as</Text>
         <Text style={{color: '#fff'}}>{cast.character}</Text>

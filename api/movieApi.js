@@ -11,7 +11,9 @@ const NowPlayingMovies = () => {
     setLoading(true);
     const data = Axios.get(
       `${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`,
-    ).then((response) => [setMovie(response.data.results), setLoading(false)]);
+    )
+      .then((response) => [setMovie(response.data.results), setLoading(false)])
+      .catch((err) => setMovie(err));
     return () => {
       data;
     };
@@ -67,7 +69,8 @@ const SearchMovie = async (query) => {
 
 const DetailMovie = (id) => {
   const [movie, setMovie] = useState([]);
-  const [cast, setCast] = useState({});
+  const [cast, setCast] = useState([]);
+  const [videos, setVideos] = useState([]);
 
   useEffect(() => {
     const data = Axios.get(
@@ -76,12 +79,15 @@ const DetailMovie = (id) => {
     const data2 = Axios.get(
       `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}`,
     ).then((response) => setCast(response.data));
+    const data3 = Axios.get(
+      `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}`,
+    ).then((response) => setVideos(response.data));
     return () => {
       [data, data2];
     };
   }, []);
 
-  return {movie: movie, cast: cast};
+  return {movie: movie, cast: cast, videos: videos};
 };
 
 // export default MovieApi;

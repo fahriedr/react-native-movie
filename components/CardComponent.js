@@ -33,7 +33,7 @@ var month_name = function (dt) {
 
 function CardComponent({movie, navigation}) {
   const image = {uri: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`};
-  const max_length = 18;
+  const max_length = 14;
 
   let title = movie.title;
   let date = new Date(movie.release_date);
@@ -42,9 +42,9 @@ function CardComponent({movie, navigation}) {
   let fullDate =
     date.getDate() + ' ' + month.substring(0, 3) + ', ' + date.getFullYear();
 
-  if (title.length > max_length) {
-    title = title.substring(0, max_length) + '...';
-  }
+  // if (title.length > max_length) {
+  //   title = title.substring(0, max_length) + '...';
+  // }
 
   return (
     <View>
@@ -93,6 +93,7 @@ const style = StyleSheet.create({
     color: '#fff',
     marginHorizontal: 15,
     marginVertical: 5,
+    width: width / 3.3,
   },
   release_date: {
     color: '#fff',

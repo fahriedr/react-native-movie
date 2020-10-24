@@ -1,7 +1,7 @@
 # react-native-movie
 
-Aplikasi React Native pertamaku
-Aplikasi Pencarian Film, menggunakan themoviedb API
+Aplikasi React Native pertamaku,
+Aplikasi Database, Pencarian Film, menggunakan themoviedb API
 
 Cara install
 

@@ -83,7 +83,7 @@ const DetailMovie = (id) => {
       `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}`,
     ).then((response) => setVideos(response.data));
     return () => {
-      [data, data2];
+      [data, data2, data3];
     };
   }, []);
 

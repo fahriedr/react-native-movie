@@ -23,7 +23,7 @@ export default function BottomNavigation({navigation}) {
       tabBarOptions={{
         activeTintColor: '#fff',
         inactiveTintColor: 'grey',
-        style: {backgroundColor: '#100e2a', height: 50, borderTopColor: 'grey'},
+        style: {backgroundColor: '#0a0a19', height: 50, borderTopColor: 'grey'},
         showLabel: false,
       }}
       tabBarLabel={() => {

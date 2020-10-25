@@ -118,7 +118,11 @@ function Search({navigation}) {
             </Pressable>
           </View>
         </View>
-        <ScrollView style={{flex: 1}}>{search_movie}</ScrollView>
+        <ScrollView
+          style={{flex: 1}}
+          contentContainerStyle={{paddingBottom: 120}}>
+          {search_movie}
+        </ScrollView>
       </View>
     </View>
   );
@@ -128,7 +132,7 @@ const style = StyleSheet.create({
   body: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#100e2a',
+    backgroundColor: '#0a0a19',
     position: 'relative',
   },
   search_bar: {

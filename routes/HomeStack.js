@@ -9,7 +9,7 @@ import PopularPage from '../pages/PopularPage';
 
 const Stack = createStackNavigator();
 
-export default function HomeStack({navigation}) {
+export default function HomeStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen

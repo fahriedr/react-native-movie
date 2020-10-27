@@ -5,7 +5,6 @@ import {
   View,
   Text,
   Pressable,
-  Alert,
   Dimensions,
 } from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -41,10 +40,6 @@ function CardComponent({movie, navigation}) {
 
   let fullDate =
     date.getDate() + ' ' + month.substring(0, 3) + ', ' + date.getFullYear();
-
-  // if (title.length > max_length) {
-  //   title = title.substring(0, max_length) + '...';
-  // }
 
   return (
     <View>

@@ -12,7 +12,6 @@ import HomePage from '../pages/HomePage';
 import Favorites from '../pages/Favorites';
 import Search from '../pages/Search';
 import ProfilePage from '../pages/ProfilePage';
-import HomeStack from '../routes/HomeStack';
 
 // const Tab = createMaterialBottomTabNavigator();
 const Tab = createBottomTabNavigator();
@@ -54,7 +53,7 @@ export default function BottomNavigation({navigation}) {
         component={Favorites}
         options={{
           tabBarIcon: ({color, size}) => (
-            <FontAwesomeIcon icon={faBookmark} color={color} size={size} />
+            <FontAwesomeIcon icon={faHeart} color={color} size={size} />
           ),
         }}
       />

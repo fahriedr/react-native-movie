@@ -4,12 +4,9 @@ import {
   Text,
   ImageBackground,
   Image,
-  StyleSheet,
   Dimensions,
   ScrollView,
   Pressable,
-  Button,
-  Alert,
   Linking,
   ActivityIndicator,
 } from 'react-native';
@@ -29,7 +26,9 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 const {width} = Dimensions.get('window');
+const {height} = Dimensions.get('window');
 import _ from 'lodash';
+import Asm from '../model/asyncStorage';
 
 function MovieDetailPage({route, navigation}) {
   const {id} = route.params;
@@ -116,7 +115,7 @@ function MovieDetailPage({route, navigation}) {
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}>
-                <BookmarkButton navigation={navigation} />
+                <BookmarkButton navigation={navigation} movie={movie} />
               </View>
             </View>
             <View
@@ -131,7 +130,7 @@ function MovieDetailPage({route, navigation}) {
               <View
                 style={{
                   width: wp('30%'),
-                  height: hp('30%'),
+                  height: height / 4,
                   borderRadius: 8,
                   backgroundColor: 'transparent',
                   marginRight: 8,
@@ -265,19 +264,26 @@ const BackButton = ({navigation}) => {
   );
 };
 
-const BookmarkButton = ({navigation}) => {
+const BookmarkButton = ({movie}) => {
   const [bookmark, setBookmark] = useState(false);
+  const id = movie.id;
+  Asm.checkData(movie.id).then((response) => {
+    setBookmark(response);
+  });
+  console.log(bookmark);
   return (
     <TouchableOpacity
       onPress={() => {
         if (bookmark === false) {
           setBookmark(!bookmark);
+          Asm.saveData(id, movie.title, movie.poster_path);
           Snackbar.show({
             text: 'Movie added to Bookmark list',
             duration: Snackbar.LENGTH_SHORT,
           });
         } else {
           setBookmark(!bookmark);
+          Asm.deleteData(movie.id);
           Snackbar.show({
             text: 'Movie remove from Bookmark list',
             duration: Snackbar.LENGTH_SHORT,

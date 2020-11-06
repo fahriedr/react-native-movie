@@ -16,7 +16,7 @@ import ProfilePage from '../pages/ProfilePage';
 // const Tab = createMaterialBottomTabNavigator();
 const Tab = createBottomTabNavigator();
 
-export default function BottomNavigation({navigation}) {
+export default function BottomNavigation() {
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -29,7 +29,6 @@ export default function BottomNavigation({navigation}) {
         return null;
       }}>
       <Tab.Screen
-        initialParams={{navigation: navigation}}
         name="Home"
         component={HomePage}
         inactiveColor="#95a5a6"

@@ -12,6 +12,8 @@ target 'MyApp' do
 
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
+  pod 'RealmJS', :path => '../node_modules/realm'
+
   target 'MyAppTests' do
     inherit! :complete
     # Pods for testing

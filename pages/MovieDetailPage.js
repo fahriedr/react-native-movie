@@ -13,6 +13,7 @@ import {
 import {DetailMovie} from '../api/movieApi';
 import LinearGradient from 'react-native-linear-gradient';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import MovieSchema from '../model/realmMovieModel';
 import {
   faArrowLeft,
   faClock,
@@ -20,7 +21,6 @@ import {
   faBookmark,
 } from '@fortawesome/free-solid-svg-icons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import Snackbar from 'react-native-snackbar';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -29,12 +29,23 @@ const {width} = Dimensions.get('window');
 const {height} = Dimensions.get('window');
 import _ from 'lodash';
 import Asm from '../model/asyncStorage';
+import Snackbar from 'react-native-snackbar';
 
 function MovieDetailPage({route, navigation}) {
   const {id} = route.params;
   const movie = DetailMovie(id).movie;
   const credits = DetailMovie(id).cast;
   const videos = DetailMovie(id).videos;
+
+  const [isBookmark, setIsBookmark] = useState(false);
+
+  useEffect(() => {
+    async function getData() {
+      const data = await Asm.getData(id);
+      setIsBookmark(data);
+    }
+    getData();
+  }, [isBookmark]);
 
   const imageBg = {
     uri: `https://image.tmdb.org/t/p/w780${movie.backdrop_path}`,
@@ -115,7 +126,11 @@ function MovieDetailPage({route, navigation}) {
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}>
-                <BookmarkButton navigation={navigation} movie={movie} />
+                <BookmarkButton
+                  movie={movie}
+                  isBookmark={isBookmark}
+                  setIsBookmark={setIsBookmark}
+                />
               </View>
             </View>
             <View
@@ -264,28 +279,22 @@ const BackButton = ({navigation}) => {
   );
 };
 
-const BookmarkButton = ({movie}) => {
-  const [bookmark, setBookmark] = useState(false);
-  const id = movie.id;
-  Asm.checkData(movie.id).then((response) => {
-    setBookmark(response);
-  });
-  console.log(bookmark);
+const BookmarkButton = ({movie, isBookmark, setIsBookmark}) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        if (bookmark === false) {
-          setBookmark(!bookmark);
-          Asm.saveData(id, movie.title, movie.poster_path);
+        if (isBookmark === false) {
+          setIsBookmark((currentState) => !currentState);
+          Asm.saveData(movie.id, movie.title, movie.poster_path);
           Snackbar.show({
-            text: 'Movie added to Bookmark list',
+            text: 'Movie saved',
             duration: Snackbar.LENGTH_SHORT,
           });
         } else {
-          setBookmark(!bookmark);
+          setIsBookmark((currentState) => !currentState);
           Asm.deleteData(movie.id);
           Snackbar.show({
-            text: 'Movie remove from Bookmark list',
+            text: 'Movie removed',
             duration: Snackbar.LENGTH_SHORT,
           });
         }
@@ -301,7 +310,7 @@ const BookmarkButton = ({movie}) => {
       <FontAwesomeIcon
         icon={faBookmark}
         size={20}
-        color={bookmark ? '#2196F3' : 'white'}
+        color={isBookmark ? '#2196F3' : 'white'}
       />
     </TouchableOpacity>
   );

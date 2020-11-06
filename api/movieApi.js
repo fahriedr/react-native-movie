@@ -1,7 +1,6 @@
 import React, {useState, useEffect, Component} from 'react';
 import Axios from 'axios';
 import {API_KEY, BASE_URL} from '@env';
-import {set} from 'react-native-reanimated';
 
 const NowPlayingMovies = () => {
   const [movie, setMovie] = useState([]);

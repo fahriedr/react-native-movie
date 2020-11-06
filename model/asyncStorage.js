@@ -11,16 +11,24 @@ class AsyncStorageModel extends Component {
     };
   }
 
+  getData = async (id) => {
+    const key = id + '';
+    try {
+      const data = await AsyncStorage.getItem(key);
+      if (data !== null) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      return error;
+    }
+  };
+
   getAllData = async () => {
     let movies = [];
     try {
-      await AsyncStorage.getAllKeys().then(async (keys) => {
-        await AsyncStorage.multiGet(keys).then((key) => {
-          key.forEach((data) => {
-            movies.push(data);
-          });
-        });
-      });
+      movies = await AsyncStorage.getAllKeys();
       return movies;
     } catch (error) {
       return error;
@@ -28,36 +36,37 @@ class AsyncStorageModel extends Component {
   };
 
   saveData = async (id, title, poster) => {
-    const idData = id.toString();
+    const key = id + '';
     const data = {
-      id: id,
       title: title,
       poster: poster,
     };
 
-    await AsyncStorage.setItem(idData, JSON.stringify(data));
+    try {
+      await AsyncStorage.setItem(key, JSON.stringify(data));
+    } catch (e) {
+      return e;
+    }
   };
 
   deleteData = async (id) => {
-    const idData = id.toString();
+    const key = id + '';
     try {
-      await AsyncStorage.removeItem(idData);
-      return 'Movie has been deleted';
+      await AsyncStorage.removeItem(key);
     } catch (exception) {
       return exception;
     }
   };
 
-  checkData = async (id) => {
+  deleteAllData = async () => {
     try {
-      const data = await AsyncStorage.getItem(id + '');
-      if (data) {
-        return true;
-      } else {
-        return false;
-      }
+      this.getAllData().then((response) => {
+        let keys = [];
+        keys = response;
+        AsyncStorage.multiRemove(keys);
+      });
     } catch (error) {
-      return error;
+      console.log(error);
     }
   };
 }

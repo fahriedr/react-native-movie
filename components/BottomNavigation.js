@@ -56,7 +56,7 @@ export default function BottomNavigation() {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Account"
         component={ProfilePage}
         options={{
@@ -64,7 +64,7 @@ export default function BottomNavigation() {
             <FontAwesomeIcon icon={faUser} color={color} size={size} />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }

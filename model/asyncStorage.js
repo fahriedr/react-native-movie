@@ -38,6 +38,7 @@ class AsyncStorageModel extends Component {
   saveData = async (id, title, poster) => {
     const key = id + '';
     const data = {
+      id: id,
       title: title,
       poster: poster,
     };

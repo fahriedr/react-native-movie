@@ -23,19 +23,23 @@ class Favorites extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      navigation: '',
       movies: [],
       query: '',
     };
   }
 
   async componentDidMount() {
-    const keys = await Asm.getAllData();
-    keys.map(async (key) => {
-      let movie = await AsyncStorage.getItem(key);
-      let jsonParse = await JSON.parse(movie);
-      this.setState({movies: [...this.state.movies, jsonParse]});
-    });
+    if (this.state.query.length === 0) {
+      let keys = [];
+      keys = await Asm.getAllData();
+      keys.map(async (key) => {
+        let movie = await AsyncStorage.getItem(key);
+        let jsonParse = await JSON.parse(movie);
+        this.setState({movies: [...this.state.movies, jsonParse]});
+      });
+    } else {
+      this.setState({movies: []});
+    }
   }
 
   async refresh() {
@@ -48,7 +52,12 @@ class Favorites extends Component {
     });
   }
 
+  queryRresult(e) {
+    this.setState({query: e});
+  }
+
   render() {
+    console.log(this.state.query);
     console.log(this.state.movies);
     let text;
     if (this.state.movies.length === 0) {
@@ -101,7 +110,7 @@ class Favorites extends Component {
                 placeholder="Search"
                 underlineColorAndroid="transparent"
                 autoCorrect={false}
-                onChangeText={(val) => this.setState({query: val})}
+                onChangeText={(val) => this.queryRresult(val)}
               />
               <Pressable
                 style={{

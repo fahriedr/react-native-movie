@@ -7,11 +7,10 @@
  */
 
 import * as React from 'react';
-import BottomNavigation from './components/BottomNavigation';
-import BottomNavigationPaper from './components/BottomNavigationPaper';
 import {NavigationContainer} from '@react-navigation/native';
 import {Provider as PaperProvider, DefaultTheme} from 'react-native-paper';
 import HomeStack from './routes/HomeStack';
+import MovieSchema from './model/realmMovieModel';
 
 const theme = {
   ...DefaultTheme,
@@ -23,12 +22,22 @@ const theme = {
   },
 };
 
-const App = () => {
-  return (
-    <NavigationContainer theme={theme}>
-      <HomeStack />
-    </NavigationContainer>
-  );
-};
+// const App = () => {
+//   return (
+//     <NavigationContainer theme={theme}>
+//       <HomeStack />
+//     </NavigationContainer>
+//   );
+// };
+
+class App extends React.Component {
+  render() {
+    return (
+      <NavigationContainer theme={theme}>
+        <HomeStack />
+      </NavigationContainer>
+    );
+  }
+}
 
 export default App;

@@ -1,7 +1,6 @@
 import React, {useState, useEffect, Component} from 'react';
 import Axios from 'axios';
 import {API_KEY, BASE_URL} from '@env';
-import {set} from 'react-native-reanimated';
 
 const NowPlayingMovies = () => {
   const [movie, setMovie] = useState([]);
@@ -83,7 +82,7 @@ const DetailMovie = (id) => {
       `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}`,
     ).then((response) => setVideos(response.data));
     return () => {
-      [data, data2];
+      [data, data2, data3];
     };
   }, []);
 

@@ -12,25 +12,23 @@ import HomePage from '../pages/HomePage';
 import Favorites from '../pages/Favorites';
 import Search from '../pages/Search';
 import ProfilePage from '../pages/ProfilePage';
-import HomeStack from '../routes/HomeStack';
 
 // const Tab = createMaterialBottomTabNavigator();
 const Tab = createBottomTabNavigator();
 
-export default function BottomNavigation({navigation}) {
+export default function BottomNavigation() {
   return (
     <Tab.Navigator
       tabBarOptions={{
         activeTintColor: '#fff',
         inactiveTintColor: 'grey',
-        style: {backgroundColor: '#100e2a', height: 50, borderTopColor: 'grey'},
+        style: {backgroundColor: '#0a0a19', height: 50, borderTopColor: 'grey'},
         showLabel: false,
       }}
       tabBarLabel={() => {
         return null;
       }}>
       <Tab.Screen
-        initialParams={{navigation: navigation}}
         name="Home"
         component={HomePage}
         inactiveColor="#95a5a6"
@@ -54,11 +52,11 @@ export default function BottomNavigation({navigation}) {
         component={Favorites}
         options={{
           tabBarIcon: ({color, size}) => (
-            <FontAwesomeIcon icon={faBookmark} color={color} size={size} />
+            <FontAwesomeIcon icon={faHeart} color={color} size={size} />
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Account"
         component={ProfilePage}
         options={{
@@ -66,7 +64,7 @@ export default function BottomNavigation({navigation}) {
             <FontAwesomeIcon icon={faUser} color={color} size={size} />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }

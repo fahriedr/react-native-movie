@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -89,7 +89,7 @@ function HomePage({navigation}) {
           <CardCarousel navigation={navigation} />
           <View style={style.tag}>
             <Text style={style.tag_text}>Now Playing Movie </Text>
-            <Pressable onPress={() => Alert.alert('Click')}>
+            <Pressable onPress={() => navigation.navigate('NowPlaying')}>
               <Text style={{color: 'blue', textDecorationLine: 'underline'}}>
                 More{' '}
               </Text>
@@ -98,7 +98,7 @@ function HomePage({navigation}) {
           <View style={{flex: 1}}>{now_playing}</View>
           <View style={style.tag}>
             <Text style={style.tag_text}>Popular Movie </Text>
-            <Pressable onPress={() => Alert.alert('Click')}>
+            <Pressable onPress={() => navigation.navigate('PopularPage')}>
               <Text style={{color: 'blue', textDecorationLine: 'underline'}}>
                 More{' '}
               </Text>
@@ -107,7 +107,7 @@ function HomePage({navigation}) {
           <View style={{flex: 1}}>{popular}</View>
           <View style={style.tag}>
             <Text style={style.tag_text}>Top Rated Movie </Text>
-            <Pressable onPress={() => Alert.alert('Click')}>
+            <Pressable onPress={() => navigation.navigate('TopRated')}>
               <Text style={{color: 'blue', textDecorationLine: 'underline'}}>
                 More{' '}
               </Text>
